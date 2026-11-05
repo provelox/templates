@@ -9,7 +9,7 @@ exactly what will run before you deploy it.
 71 templates: databases and caches, web apps (CMS, wikis, analytics, password managers, AI front ends), and tools. The full
 list is on the Templates page of a Provelox server, or in [`provelox-templates.yaml`](provelox-templates.yaml).
 
-Logos are in [`icons/`](icons/) and are served from GitHub Pages at `https://provelox.github.io/templates/icons/`. The
+Logos are in [`icons/`](icons/) and are served from GitHub Pages at `https://templates.provelox.com/icons/`. The
 index points there, so the Pages site must be published for logos to show (without it, cards show initials).
 
 ## Use it

@@ -8,6 +8,7 @@ import YAML from 'yaml';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'site');
 const REPO = 'https://github.com/provelox/templates';
+const DOMAIN = 'templates.provelox.com';
 
 const index = YAML.parse(readFileSync(join(root, 'provelox-templates.yaml'), 'utf8'));
 const templates = [...index.templates].sort((a, b) => a.name.localeCompare(b.name));
@@ -126,6 +127,7 @@ rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 writeFileSync(join(out, 'index.html'), html);
 writeFileSync(join(out, '.nojekyll'), '');
+writeFileSync(join(out, 'CNAME'), `${DOMAIN}\n`);
 cpSync(join(root, 'icons'), join(out, 'icons'), { recursive: true });
 cpSync(join(root, 'provelox-templates.yaml'), join(out, 'provelox-templates.yaml'));
 console.log(`site: ${templates.length} templates, ${categories.length} categories -> ${out}`);

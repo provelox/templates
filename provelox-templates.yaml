@@ -28,7 +28,7 @@ templates:
       - key: POSTGRES_PASSWORD
         label: Password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/postgresql.svg
+    icon: https://templates.provelox.com/icons/postgresql.svg
     composeFile: apps/postgres/compose.yml
   - id: redis
     name: Redis
@@ -42,7 +42,7 @@ templates:
       - key: REDIS_PASSWORD
         label: Password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/redis.svg
+    icon: https://templates.provelox.com/icons/redis.svg
     composeFile: apps/redis/compose.yml
   - id: mysql
     name: MySQL
@@ -60,7 +60,7 @@ templates:
       - key: MYSQL_ROOT_PASSWORD
         label: Root password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/mysql.svg
+    icon: https://templates.provelox.com/icons/mysql.svg
     composeFile: apps/mysql/compose.yml
   - id: mongodb
     name: MongoDB
@@ -78,7 +78,7 @@ templates:
       - key: MONGO_PASSWORD
         label: Admin password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/mongodb.svg
+    icon: https://templates.provelox.com/icons/mongodb.svg
     composeFile: apps/mongodb/compose.yml
   - id: rustfs
     name: RustFS
@@ -97,7 +97,7 @@ templates:
         label: Secret key
         description: At least 8 characters.
         kind: secret
-    icon: https://provelox.github.io/templates/icons/rustfs.svg
+    icon: https://templates.provelox.com/icons/rustfs.svg
     composeFile: apps/rustfs/compose.yml
   - id: uptime-kuma
     name: Uptime Kuma
@@ -107,7 +107,7 @@ templates:
     port: 3001
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/uptimekuma.svg
+    icon: https://templates.provelox.com/icons/uptimekuma.svg
     composeFile: apps/uptime-kuma/compose.yml
   - id: wordpress
     name: WordPress
@@ -131,7 +131,7 @@ templates:
       - key: DB_ROOT_PASSWORD
         label: Database root password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/wordpress.svg
+    icon: https://templates.provelox.com/icons/wordpress.svg
     composeFile: apps/wordpress/compose.yml
   - id: adminer
     name: Adminer
@@ -141,7 +141,7 @@ templates:
     port: 8080
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/adminer.svg
+    icon: https://templates.provelox.com/icons/adminer.svg
     composeFile: apps/adminer/compose.yml
   - id: ghost
     name: Ghost
@@ -158,7 +158,7 @@ templates:
       - key: DB_PASSWORD
         label: Database password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/ghost.svg
+    icon: https://templates.provelox.com/icons/ghost.svg
     composeFile: apps/ghost/compose.yml
   - id: directus
     name: Directus
@@ -185,7 +185,7 @@ templates:
         key: DB_PASSWORD
         label: Database password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/directus.svg
+    icon: https://templates.provelox.com/icons/directus.svg
     composeFile: apps/directus/compose.yml
   - id: drupal
     name: Drupal
@@ -204,7 +204,7 @@ templates:
         default: drupal
         kind: text
       - *a1
-    icon: https://provelox.github.io/templates/icons/drupal.svg
+    icon: https://templates.provelox.com/icons/drupal.svg
     composeFile: apps/drupal/compose.yml
   - id: joomla
     name: Joomla
@@ -226,7 +226,7 @@ templates:
       - key: DB_ROOT_PASSWORD
         label: Database root password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/joomla.svg
+    icon: https://templates.provelox.com/icons/joomla.svg
     composeFile: apps/joomla/compose.yml
   - id: n8n
     name: n8n
@@ -244,7 +244,7 @@ templates:
         label: Encryption key
         description: "Protects saved credentials. Keep it: without it they cannot be read back."
         kind: secret
-    icon: https://provelox.github.io/templates/icons/n8n.svg
+    icon: https://templates.provelox.com/icons/n8n.svg
     composeFile: apps/n8n/compose.yml
   - id: nocodb
     name: NocoDB
@@ -257,7 +257,7 @@ templates:
       - key: NC_AUTH_JWT_SECRET
         label: Signing secret
         kind: secret
-    icon: https://provelox.github.io/templates/icons/nocodb.png
+    icon: https://templates.provelox.com/icons/nocodb.png
     composeFile: apps/nocodb/compose.yml
   - id: appsmith
     name: Appsmith
@@ -267,7 +267,7 @@ templates:
     port: 80
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/appsmith.svg
+    icon: https://templates.provelox.com/icons/appsmith.svg
     composeFile: apps/appsmith/compose.yml
   - id: nextcloud
     name: Nextcloud
@@ -289,7 +289,7 @@ templates:
         label: Admin password
         kind: secret
       - *a1
-    icon: https://provelox.github.io/templates/icons/nextcloud.svg
+    icon: https://templates.provelox.com/icons/nextcloud.svg
     composeFile: apps/nextcloud/compose.yml
   - id: mattermost
     name: Mattermost
@@ -300,7 +300,7 @@ templates:
     publicWeb: true
     variables:
       - *a1
-    icon: https://provelox.github.io/templates/icons/mattermost.svg
+    icon: https://templates.provelox.com/icons/mattermost.svg
     composeFile: apps/mattermost/compose.yml
   - id: paperless-ngx
     name: Paperless-ngx
@@ -325,7 +325,7 @@ templates:
         label: Secret key
         kind: secret
       - *a1
-    icon: https://provelox.github.io/templates/icons/paperlessngx.svg
+    icon: https://templates.provelox.com/icons/paperlessngx.svg
     composeFile: apps/paperless-ngx/compose.yml
   - id: wikijs
     name: Wiki.js
@@ -336,7 +336,7 @@ templates:
     publicWeb: true
     variables:
       - *a1
-    icon: https://provelox.github.io/templates/icons/wikidotjs.svg
+    icon: https://templates.provelox.com/icons/wikidotjs.svg
     composeFile: apps/wikijs/compose.yml
   - id: memos
     name: Memos
@@ -346,7 +346,7 @@ templates:
     port: 5230
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/memos.svg
+    icon: https://templates.provelox.com/icons/memos.svg
     composeFile: apps/memos/compose.yml
   - id: vaultwarden
     name: Vaultwarden
@@ -365,7 +365,7 @@ templates:
         description: Set to false after you and your people have created accounts.
         default: "true"
         kind: text
-    icon: https://provelox.github.io/templates/icons/vaultwarden.svg
+    icon: https://templates.provelox.com/icons/vaultwarden.svg
     composeFile: apps/vaultwarden/compose.yml
   - id: keycloak
     name: Keycloak
@@ -387,7 +387,7 @@ templates:
         label: Admin password
         kind: secret
       - *a1
-    icon: https://provelox.github.io/templates/icons/keycloak.svg
+    icon: https://templates.provelox.com/icons/keycloak.svg
     composeFile: apps/keycloak/compose.yml
   - id: metabase
     name: Metabase
@@ -398,7 +398,7 @@ templates:
     publicWeb: true
     variables:
       - *a1
-    icon: https://provelox.github.io/templates/icons/metabase.svg
+    icon: https://templates.provelox.com/icons/metabase.svg
     composeFile: apps/metabase/compose.yml
   - id: grafana
     name: Grafana
@@ -415,7 +415,7 @@ templates:
       - key: ADMIN_PASSWORD
         label: Admin password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/grafana.svg
+    icon: https://templates.provelox.com/icons/grafana.svg
     composeFile: apps/grafana/compose.yml
   - id: gitea
     name: Gitea
@@ -425,7 +425,7 @@ templates:
     port: 3000
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/gitea.svg
+    icon: https://templates.provelox.com/icons/gitea.svg
     composeFile: apps/gitea/compose.yml
   - id: open-webui
     name: Open WebUI
@@ -438,7 +438,7 @@ templates:
       - key: WEBUI_SECRET_KEY
         label: Secret key
         kind: secret
-    icon: https://provelox.github.io/templates/icons/openwebui.svg
+    icon: https://templates.provelox.com/icons/openwebui.svg
     composeFile: apps/open-webui/compose.yml
   - id: langflow
     name: Langflow
@@ -458,7 +458,7 @@ templates:
       - key: SECRET_KEY
         label: Secret key
         kind: secret
-    icon: https://provelox.github.io/templates/icons/langflow.svg
+    icon: https://templates.provelox.com/icons/langflow.svg
     composeFile: apps/langflow/compose.yml
   - id: anythingllm
     name: AnythingLLM
@@ -474,7 +474,7 @@ templates:
       - key: JWT_SECRET
         label: Signing secret
         kind: secret
-    icon: https://provelox.github.io/templates/icons/anythingllm.png
+    icon: https://templates.provelox.com/icons/anythingllm.png
     composeFile: apps/anythingllm/compose.yml
   - id: clickhouse
     name: ClickHouse
@@ -496,7 +496,7 @@ templates:
       - key: CLICKHOUSE_PASSWORD
         label: Password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/clickhouse.svg
+    icon: https://templates.provelox.com/icons/clickhouse.svg
     composeFile: apps/clickhouse/compose.yml
   - id: meilisearch
     name: Meilisearch
@@ -511,7 +511,7 @@ templates:
         label: Master key
         description: At least 16 characters. Use it to create narrower keys for your app.
         kind: secret
-    icon: https://provelox.github.io/templates/icons/meilisearch.svg
+    icon: https://templates.provelox.com/icons/meilisearch.svg
     composeFile: apps/meilisearch/compose.yml
   - id: strapi
     name: Strapi
@@ -537,7 +537,7 @@ templates:
         label: Signing secret
         kind: secret
       - *a1
-    icon: https://provelox.github.io/templates/icons/strapi.svg
+    icon: https://templates.provelox.com/icons/strapi.svg
     composeFile: apps/strapi/compose.yml
   - id: baserow
     name: Baserow
@@ -554,7 +554,7 @@ templates:
       - key: SECRET_KEY
         label: Secret key
         kind: secret
-    icon: https://provelox.github.io/templates/icons/baserow.svg
+    icon: https://templates.provelox.com/icons/baserow.svg
     composeFile: apps/baserow/compose.yml
   - id: odoo
     name: Odoo
@@ -565,7 +565,7 @@ templates:
     publicWeb: true
     variables:
       - *a1
-    icon: https://provelox.github.io/templates/icons/odoo.svg
+    icon: https://templates.provelox.com/icons/odoo.svg
     composeFile: apps/odoo/compose.yml
   - id: matomo
     name: Matomo
@@ -579,7 +579,7 @@ templates:
       - key: DB_ROOT_PASSWORD
         label: Database root password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/matomo.svg
+    icon: https://templates.provelox.com/icons/matomo.svg
     composeFile: apps/matomo/compose.yml
   - id: ollama
     name: Ollama
@@ -590,7 +590,7 @@ templates:
     connect: http://{host}:{port}
     publicWeb: false
     variables: []
-    icon: https://provelox.github.io/templates/icons/ollama.svg
+    icon: https://templates.provelox.com/icons/ollama.svg
     composeFile: apps/ollama/compose.yml
   - id: qdrant
     name: Qdrant
@@ -604,7 +604,7 @@ templates:
       - key: API_KEY
         label: API key
         kind: secret
-    icon: https://provelox.github.io/templates/icons/qdrant.svg
+    icon: https://templates.provelox.com/icons/qdrant.svg
     composeFile: apps/qdrant/compose.yml
   - id: rabbitmq
     name: RabbitMQ
@@ -622,7 +622,7 @@ templates:
       - key: RABBITMQ_PASSWORD
         label: Password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/rabbitmq.svg
+    icon: https://templates.provelox.com/icons/rabbitmq.svg
     composeFile: apps/rabbitmq/compose.yml
   - id: mailpit
     name: Mailpit
@@ -639,7 +639,7 @@ templates:
       - key: MAIL_PASSWORD
         label: Inbox password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/mailpit.svg
+    icon: https://templates.provelox.com/icons/mailpit.svg
     composeFile: apps/mailpit/compose.yml
   - id: excalidraw
     name: Excalidraw
@@ -649,7 +649,7 @@ templates:
     port: 80
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/excalidraw.svg
+    icon: https://templates.provelox.com/icons/excalidraw.svg
     composeFile: apps/excalidraw/compose.yml
   - id: it-tools
     name: IT-Tools
@@ -659,7 +659,7 @@ templates:
     port: 80
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/ittools.png
+    icon: https://templates.provelox.com/icons/ittools.png
     composeFile: apps/it-tools/compose.yml
   - id: stirling-pdf
     name: Stirling PDF
@@ -669,7 +669,7 @@ templates:
     port: 8080
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/stirlingpdf.svg
+    icon: https://templates.provelox.com/icons/stirlingpdf.svg
     composeFile: apps/stirling-pdf/compose.yml
   - id: actual-budget
     name: Actual Budget
@@ -679,7 +679,7 @@ templates:
     port: 5006
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/actualbudget.svg
+    icon: https://templates.provelox.com/icons/actualbudget.svg
     composeFile: apps/actual-budget/compose.yml
   - id: mealie
     name: Mealie
@@ -698,7 +698,7 @@ templates:
         key: ADMIN_PASSWORD
         label: Admin password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/mealie.svg
+    icon: https://templates.provelox.com/icons/mealie.svg
     composeFile: apps/mealie/compose.yml
   - id: linkding
     name: Linkding
@@ -715,7 +715,7 @@ templates:
       - key: ADMIN_PASSWORD
         label: Admin password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/linkding.svg
+    icon: https://templates.provelox.com/icons/linkding.svg
     composeFile: apps/linkding/compose.yml
   - id: docuseal
     name: DocuSeal
@@ -728,7 +728,7 @@ templates:
       - key: SECRET_KEY_BASE
         label: Secret key
         kind: secret
-    icon: https://provelox.github.io/templates/icons/docuseal.svg
+    icon: https://templates.provelox.com/icons/docuseal.svg
     composeFile: apps/docuseal/compose.yml
   - id: firefly-iii
     name: Firefly III
@@ -749,7 +749,7 @@ templates:
         kind: secret
         minLength: 32
       - *a1
-    icon: https://provelox.github.io/templates/icons/fireflyiii.svg
+    icon: https://templates.provelox.com/icons/fireflyiii.svg
     composeFile: apps/firefly-iii/compose.yml
   - id: freshrss
     name: FreshRSS
@@ -759,7 +759,7 @@ templates:
     port: 80
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/freshrss.svg
+    icon: https://templates.provelox.com/icons/freshrss.svg
     composeFile: apps/freshrss/compose.yml
   - id: miniflux
     name: Miniflux
@@ -776,7 +776,7 @@ templates:
         kind: text
       - *a3
       - *a1
-    icon: https://provelox.github.io/templates/icons/miniflux.png
+    icon: https://templates.provelox.com/icons/miniflux.png
     composeFile: apps/miniflux/compose.yml
   - id: linkwarden
     name: Linkwarden
@@ -794,7 +794,7 @@ templates:
         label: Sign-in secret
         kind: secret
       - *a1
-    icon: https://provelox.github.io/templates/icons/linkwarden.png
+    icon: https://templates.provelox.com/icons/linkwarden.png
     composeFile: apps/linkwarden/compose.yml
   - id: shlink
     name: Shlink
@@ -812,7 +812,7 @@ templates:
         label: API key
         kind: secret
       - *a1
-    icon: https://provelox.github.io/templates/icons/shlink.svg
+    icon: https://templates.provelox.com/icons/shlink.svg
     composeFile: apps/shlink/compose.yml
   - id: yourls
     name: YOURLS
@@ -833,7 +833,7 @@ templates:
         key: DB_ROOT_PASSWORD
         label: Database root password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/yourls.svg
+    icon: https://templates.provelox.com/icons/yourls.svg
     composeFile: apps/yourls/compose.yml
   - id: privatebin
     name: PrivateBin
@@ -843,7 +843,7 @@ templates:
     port: 8080
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/privatebin.svg
+    icon: https://templates.provelox.com/icons/privatebin.svg
     composeFile: apps/privatebin/compose.yml
   - id: drawio
     name: draw.io
@@ -853,7 +853,7 @@ templates:
     port: 8080
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/diagramsdotnet.svg
+    icon: https://templates.provelox.com/icons/diagramsdotnet.svg
     composeFile: apps/drawio/compose.yml
   - id: homebox
     name: Homebox
@@ -863,7 +863,7 @@ templates:
     port: 7745
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/homebox.svg
+    icon: https://templates.provelox.com/icons/homebox.svg
     composeFile: apps/homebox/compose.yml
   - id: photoprism
     name: PhotoPrism
@@ -875,7 +875,7 @@ templates:
     variables:
       - *a4
       - *a3
-    icon: https://provelox.github.io/templates/icons/photoprism.svg
+    icon: https://templates.provelox.com/icons/photoprism.svg
     composeFile: apps/photoprism/compose.yml
   - id: audiobookshelf
     name: Audiobookshelf
@@ -885,7 +885,7 @@ templates:
     port: 80
     publicWeb: true
     variables: []
-    icon: https://provelox.github.io/templates/icons/audiobookshelf.svg
+    icon: https://templates.provelox.com/icons/audiobookshelf.svg
     composeFile: apps/audiobookshelf/compose.yml
   - id: gitlab
     name: GitLab
@@ -902,7 +902,7 @@ templates:
       - key: ROOT_PASSWORD
         label: Root password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/gitlab.svg
+    icon: https://templates.provelox.com/icons/gitlab.svg
     composeFile: apps/gitlab/compose.yml
   - id: pgadmin
     name: pgAdmin
@@ -914,7 +914,7 @@ templates:
     variables:
       - *a2
       - *a3
-    icon: https://provelox.github.io/templates/icons/pgadmin.png
+    icon: https://templates.provelox.com/icons/pgadmin.png
     composeFile: apps/pgadmin/compose.yml
   - id: phpmyadmin
     name: phpMyAdmin
@@ -928,7 +928,7 @@ templates:
         label: Database host
         description: The host shown on the database's project page, for example myproject-mysql. Only this one is reachable from the page.
         kind: text
-    icon: https://provelox.github.io/templates/icons/phpmyadmin.svg
+    icon: https://templates.provelox.com/icons/phpmyadmin.svg
     composeFile: apps/phpmyadmin/compose.yml
   - id: healthchecks
     name: Healthchecks
@@ -947,7 +947,7 @@ templates:
       - key: SECRET_KEY
         label: Secret key
         kind: secret
-    icon: https://provelox.github.io/templates/icons/healthchecks.svg
+    icon: https://templates.provelox.com/icons/healthchecks.svg
     composeFile: apps/healthchecks/compose.yml
   - id: gotify
     name: Gotify
@@ -959,7 +959,7 @@ templates:
     variables:
       - *a4
       - *a3
-    icon: https://provelox.github.io/templates/icons/gotify.png
+    icon: https://templates.provelox.com/icons/gotify.png
     composeFile: apps/gotify/compose.yml
   - id: listmonk
     name: Listmonk
@@ -972,7 +972,7 @@ templates:
       - *a4
       - *a3
       - *a1
-    icon: https://provelox.github.io/templates/icons/listmonk.svg
+    icon: https://templates.provelox.com/icons/listmonk.svg
     composeFile: apps/listmonk/compose.yml
   - id: litellm
     name: LiteLLM
@@ -988,7 +988,7 @@ templates:
       - *a4
       - *a3
       - *a1
-    icon: https://provelox.github.io/templates/icons/litellm.png
+    icon: https://templates.provelox.com/icons/litellm.png
     composeFile: apps/litellm/compose.yml
   - id: prestashop
     name: PrestaShop
@@ -1006,7 +1006,7 @@ templates:
       - *a3
       - *a1
       - *a5
-    icon: https://provelox.github.io/templates/icons/prestashop.svg
+    icon: https://templates.provelox.com/icons/prestashop.svg
     composeFile: apps/prestashop/compose.yml
   - id: mariadb
     name: MariaDB
@@ -1024,7 +1024,7 @@ templates:
       - key: MARIADB_ROOT_PASSWORD
         label: Root password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/mariadb.svg
+    icon: https://templates.provelox.com/icons/mariadb.svg
     composeFile: apps/mariadb/compose.yml
   - id: valkey
     name: Valkey
@@ -1038,7 +1038,7 @@ templates:
       - key: VALKEY_PASSWORD
         label: Password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/valkey.svg
+    icon: https://templates.provelox.com/icons/valkey.svg
     composeFile: apps/valkey/compose.yml
   - id: timescaledb
     name: TimescaleDB
@@ -1060,7 +1060,7 @@ templates:
       - key: POSTGRES_PASSWORD
         label: Password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/timescale.svg
+    icon: https://templates.provelox.com/icons/timescale.svg
     composeFile: apps/timescaledb/compose.yml
   - id: influxdb
     name: InfluxDB
@@ -1083,7 +1083,7 @@ templates:
       - key: ADMIN_TOKEN
         label: Admin API token
         kind: secret
-    icon: https://provelox.github.io/templates/icons/influxdb.svg
+    icon: https://templates.provelox.com/icons/influxdb.svg
     composeFile: apps/influxdb/compose.yml
   - id: couchdb
     name: CouchDB
@@ -1101,7 +1101,7 @@ templates:
       - key: COUCHDB_PASSWORD
         label: Admin password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/apachecouchdb.svg
+    icon: https://templates.provelox.com/icons/apachecouchdb.svg
     composeFile: apps/couchdb/compose.yml
   - id: neo4j
     name: Neo4j
@@ -1115,7 +1115,7 @@ templates:
       - key: NEO4J_PASSWORD
         label: Password
         kind: secret
-    icon: https://provelox.github.io/templates/icons/neo4j.svg
+    icon: https://templates.provelox.com/icons/neo4j.svg
     composeFile: apps/neo4j/compose.yml
   - id: squidex
     name: Squidex
