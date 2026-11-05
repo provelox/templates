@@ -1,0 +1,13 @@
+services:
+  stirling-pdf:
+    image: stirlingtools/stirling-pdf:latest
+    restart: unless-stopped
+    volumes:
+      - tessdata:/usr/share/tessdata
+      - configs:/configs
+    x-provelox:
+      expose: true
+      port: 8080
+volumes:
+  tessdata:
+  configs:

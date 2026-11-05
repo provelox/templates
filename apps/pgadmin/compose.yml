@@ -1,0 +1,14 @@
+services:
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${ADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${ADMIN_PASSWORD}
+    volumes:
+      - data:/var/lib/pgadmin
+    x-provelox:
+      expose: true
+      port: 80
+volumes:
+  data:

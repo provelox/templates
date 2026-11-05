@@ -1,0 +1,13 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4-management
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      # the data directory is named after the node: a fixed name keeps it when the container is recreated
+      RABBITMQ_NODENAME: rabbit@localhost
+    volumes:
+      - data:/var/lib/rabbitmq
+volumes:
+  data:

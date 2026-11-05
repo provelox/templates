@@ -1,0 +1,18 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    restart: unless-stopped
+    environment:
+      GITLAB_ROOT_PASSWORD: ${ROOT_PASSWORD}
+      GITLAB_OMNIBUS_CONFIG: "external_url '${GITLAB_URL}'; letsencrypt['enable'] = false; nginx['listen_port'] = 80; nginx['listen_https'] = false"
+    volumes:
+      - config:/etc/gitlab
+      - logs:/var/log/gitlab
+      - data:/var/opt/gitlab
+    x-provelox:
+      expose: true
+      port: 80
+volumes:
+  config:
+  logs:
+  data:

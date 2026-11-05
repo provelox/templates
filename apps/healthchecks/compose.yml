@@ -1,0 +1,21 @@
+services:
+  healthchecks:
+    image: healthchecks/healthchecks:latest
+    restart: unless-stopped
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      SITE_ROOT: ${PUBLIC_URL}
+      ALLOWED_HOSTS: "*"
+      DB: sqlite
+      DB_NAME: /data/hc.sqlite
+      REGISTRATION_OPEN: "False"
+      SUPERUSER_EMAIL: ${ADMIN_EMAIL}
+      SUPERUSER_PASSWORD: ${ADMIN_PASSWORD}
+      DEFAULT_FROM_EMAIL: ${ADMIN_EMAIL}
+    volumes:
+      - data:/data
+    x-provelox:
+      expose: true
+      port: 8000
+volumes:
+  data:

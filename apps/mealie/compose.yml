@@ -1,0 +1,15 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest
+    restart: unless-stopped
+    environment:
+      ALLOW_SIGNUP: "false"
+      DEFAULT_EMAIL: ${ADMIN_EMAIL}
+      DEFAULT_PASSWORD: ${ADMIN_PASSWORD}
+    volumes:
+      - data:/app/data
+    x-provelox:
+      expose: true
+      port: 9000
+volumes:
+  data:

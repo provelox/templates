@@ -1,0 +1,16 @@
+services:
+  freshrss:
+    image: freshrss/freshrss:latest
+    restart: unless-stopped
+    environment:
+      CRON_MIN: "1,31"
+      TZ: UTC
+    volumes:
+      - data:/var/www/FreshRSS/data
+      - extensions:/var/www/FreshRSS/extensions
+    x-provelox:
+      expose: true
+      port: 80
+volumes:
+  data:
+  extensions:

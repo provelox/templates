@@ -1,0 +1,26 @@
+services:
+  metabase:
+    image: metabase/metabase:latest
+    restart: unless-stopped
+    depends_on: [db]
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_HOST: db
+      MB_DB_PORT: "5432"
+      MB_DB_DBNAME: metabase
+      MB_DB_USER: metabase
+      MB_DB_PASS: ${DB_PASSWORD}
+    x-provelox:
+      expose: true
+      port: 3000
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: metabase
+      POSTGRES_USER: metabase
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  dbdata:

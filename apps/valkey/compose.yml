@@ -1,0 +1,9 @@
+services:
+  valkey:
+    image: valkey/valkey:8
+    restart: unless-stopped
+    command: valkey-server --requirepass ${VALKEY_PASSWORD} --appendonly yes
+    volumes:
+      - data:/data
+volumes:
+  data:

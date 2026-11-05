@@ -1,0 +1,35 @@
+services:
+  directus:
+    image: directus/directus:11
+    restart: unless-stopped
+    depends_on: [db]
+    environment:
+      KEY: ${KEY}
+      SECRET: ${SECRET}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      DB_CLIENT: pg
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: directus
+      DB_USER: directus
+      DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - uploads:/directus/uploads
+      - extensions:/directus/extensions
+    x-provelox:
+      expose: true
+      port: 8055
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: directus
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: directus
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  uploads:
+  extensions:
+  dbdata:

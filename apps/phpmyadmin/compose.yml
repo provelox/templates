@@ -1,0 +1,9 @@
+services:
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: unless-stopped
+    environment:
+      PMA_HOST: ${DB_HOST}
+    x-provelox:
+      expose: true
+      port: 80

@@ -1,0 +1,16 @@
+services:
+  langflow:
+    image: langflowai/langflow:latest
+    restart: unless-stopped
+    environment:
+      LANGFLOW_AUTO_LOGIN: "false"
+      LANGFLOW_SUPERUSER: ${ADMIN_USER}
+      LANGFLOW_SUPERUSER_PASSWORD: ${ADMIN_PASSWORD}
+      LANGFLOW_SECRET_KEY: ${SECRET_KEY}
+    volumes:
+      - data:/app/langflow
+    x-provelox:
+      expose: true
+      port: 7860
+volumes:
+  data:

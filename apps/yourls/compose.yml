@@ -1,0 +1,28 @@
+services:
+  yourls:
+    image: yourls:latest
+    restart: unless-stopped
+    depends_on: [db]
+    environment:
+      YOURLS_SITE: ${PUBLIC_URL}
+      YOURLS_USER: ${ADMIN_USER}
+      YOURLS_PASS: ${ADMIN_PASSWORD}
+      YOURLS_DB_HOST: db
+      YOURLS_DB_NAME: yourls
+      YOURLS_DB_USER: yourls
+      YOURLS_DB_PASS: ${DB_PASSWORD}
+    x-provelox:
+      expose: true
+      port: 80
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: yourls
+      MARIADB_USER: yourls
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+volumes:
+  dbdata:

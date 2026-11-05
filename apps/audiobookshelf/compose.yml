@@ -1,0 +1,17 @@
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    restart: unless-stopped
+    volumes:
+      - config:/config
+      - metadata:/metadata
+      - audiobooks:/audiobooks
+      - podcasts:/podcasts
+    x-provelox:
+      expose: true
+      port: 80
+volumes:
+  config:
+  metadata:
+  audiobooks:
+  podcasts:

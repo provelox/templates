@@ -1,0 +1,17 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    environment:
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+      N8N_PROTOCOL: https
+      N8N_EDITOR_BASE_URL: ${PUBLIC_URL}
+      WEBHOOK_URL: ${PUBLIC_URL}/
+      N8N_PROXY_HOPS: "1"
+    volumes:
+      - data:/home/node/.n8n
+    x-provelox:
+      expose: true
+      port: 5678
+volumes:
+  data:

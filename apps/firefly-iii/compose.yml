@@ -1,0 +1,33 @@
+services:
+  firefly:
+    image: fireflyiii/core:latest
+    restart: unless-stopped
+    depends_on: [db]
+    environment:
+      APP_KEY: ${APP_KEY}
+      APP_URL: ${PUBLIC_URL}
+      SITE_OWNER: ${ADMIN_EMAIL}
+      TRUSTED_PROXIES: "**"
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: firefly
+      DB_USERNAME: firefly
+      DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - upload:/var/www/html/storage/upload
+    x-provelox:
+      expose: true
+      port: 8080
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: firefly
+      POSTGRES_USER: firefly
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  upload:
+  dbdata:

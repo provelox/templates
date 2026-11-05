@@ -1,0 +1,28 @@
+services:
+  shlink:
+    image: shlinkio/shlink:stable
+    restart: unless-stopped
+    depends_on: [db]
+    environment:
+      DEFAULT_DOMAIN: ${DEFAULT_DOMAIN}
+      IS_HTTPS_ENABLED: "true"
+      INITIAL_API_KEY: ${API_KEY}
+      DB_DRIVER: postgres
+      DB_HOST: db
+      DB_NAME: shlink
+      DB_USER: shlink
+      DB_PASSWORD: ${DB_PASSWORD}
+    x-provelox:
+      expose: true
+      port: 8080
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: shlink
+      POSTGRES_USER: shlink
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  dbdata:

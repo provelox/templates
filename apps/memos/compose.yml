@@ -1,0 +1,11 @@
+services:
+  memos:
+    image: neosmemo/memos:stable
+    restart: unless-stopped
+    volumes:
+      - data:/var/opt/memos
+    x-provelox:
+      expose: true
+      port: 5230
+volumes:
+  data:

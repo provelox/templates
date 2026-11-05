@@ -1,0 +1,7 @@
+services:
+  excalidraw:
+    image: excalidraw/excalidraw:latest
+    restart: unless-stopped
+    x-provelox:
+      expose: true
+      port: 80

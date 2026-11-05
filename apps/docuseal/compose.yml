@@ -1,0 +1,13 @@
+services:
+  docuseal:
+    image: docuseal/docuseal:latest
+    restart: unless-stopped
+    environment:
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    volumes:
+      - data:/data
+    x-provelox:
+      expose: true
+      port: 3000
+volumes:
+  data:

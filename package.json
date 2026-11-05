@@ -1,0 +1,13 @@
+{
+  "name": "provelox-templates",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ready-made apps for Provelox: a template registry and the Compose file behind each template.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "validate": "node scripts/validate.mjs"
+  },
+  "devDependencies": {
+    "yaml": "^2.9.1"
+  }
+}

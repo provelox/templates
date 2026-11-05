@@ -1,0 +1,14 @@
+services:
+  linkding:
+    image: sissbruecker/linkding:latest
+    restart: unless-stopped
+    environment:
+      LD_SUPERUSER_NAME: ${ADMIN_USER}
+      LD_SUPERUSER_PASSWORD: ${ADMIN_PASSWORD}
+    volumes:
+      - data:/etc/linkding/data
+    x-provelox:
+      expose: true
+      port: 9090
+volumes:
+  data:

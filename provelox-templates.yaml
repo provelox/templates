@@ -1,0 +1,1139 @@
+# Provelox templates: ready-made apps you deploy from the Templates page of a Provelox server.
+#
+# Add this repository as a Git template registry (Settings → Template registries → Git repository), or read this file
+# straight from GitHub. Each template's Compose file is in apps/<id>/compose.yml. Logos under icons/ are served from
+# GitHub Pages.
+#
+# Every password and secret key is a "secret" variable: Provelox generates it when someone deploys.
+# Check the file with: npm run validate
+name: Provelox templates
+templates:
+  - id: postgres
+    name: PostgreSQL
+    description: The popular relational database. Data is kept on a volume that survives redeploys.
+    category: Database
+    mainService: postgres
+    port: 5432
+    connect: postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{host}:{port}/{POSTGRES_DB}
+    publicWeb: false
+    variables:
+      - key: POSTGRES_USER
+        label: Username
+        default: postgres
+        kind: text
+      - key: POSTGRES_DB
+        label: Database name
+        default: app
+        kind: text
+      - key: POSTGRES_PASSWORD
+        label: Password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/postgresql.svg
+    composeFile: apps/postgres/compose.yml
+  - id: redis
+    name: Redis
+    description: In-memory data store for caches, queues and sessions, with a password and on-disk persistence.
+    category: Database
+    mainService: redis
+    port: 6379
+    connect: redis://:{REDIS_PASSWORD}@{host}:{port}
+    publicWeb: false
+    variables:
+      - key: REDIS_PASSWORD
+        label: Password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/redis.svg
+    composeFile: apps/redis/compose.yml
+  - id: mysql
+    name: MySQL
+    description: MySQL 8.4 with a database created for you. Data is kept on a volume.
+    category: Database
+    mainService: mysql
+    port: 3306
+    connect: mysql://root:{MYSQL_ROOT_PASSWORD}@{host}:{port}/{MYSQL_DATABASE}
+    publicWeb: false
+    variables:
+      - key: MYSQL_DATABASE
+        label: Database name
+        default: app
+        kind: text
+      - key: MYSQL_ROOT_PASSWORD
+        label: Root password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/mysql.svg
+    composeFile: apps/mysql/compose.yml
+  - id: mongodb
+    name: MongoDB
+    description: Document database with an admin user. Data is kept on a volume.
+    category: Database
+    mainService: mongo
+    port: 27017
+    connect: mongodb://{MONGO_USER}:{MONGO_PASSWORD}@{host}:{port}
+    publicWeb: false
+    variables:
+      - key: MONGO_USER
+        label: Admin username
+        default: admin
+        kind: text
+      - key: MONGO_PASSWORD
+        label: Admin password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/mongodb.svg
+    composeFile: apps/mongodb/compose.yml
+  - id: rustfs
+    name: RustFS
+    description: S3-compatible object storage with a web console. Other apps use the S3 API on port 9000.
+    category: Storage
+    mainService: rustfs
+    port: 9000
+    connect: http://{host}:{port}
+    publicWeb: true
+    variables:
+      - key: RUSTFS_ACCESS_KEY
+        label: Access key
+        default: rustfsadmin
+        kind: text
+      - key: RUSTFS_SECRET_KEY
+        label: Secret key
+        description: At least 8 characters.
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/rustfs.svg
+    composeFile: apps/rustfs/compose.yml
+  - id: uptime-kuma
+    name: Uptime Kuma
+    description: A friendly self-hosted uptime monitor with status pages and notifications.
+    category: Monitoring
+    mainService: kuma
+    port: 3001
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/uptimekuma.svg
+    composeFile: apps/uptime-kuma/compose.yml
+  - id: wordpress
+    name: WordPress
+    description: WordPress with its own MariaDB database. Site files and database are kept on volumes.
+    category: Web
+    mainService: wordpress
+    port: 80
+    publicWeb: true
+    variables:
+      - key: DB_NAME
+        label: Database name
+        default: wordpress
+        kind: text
+      - key: DB_USER
+        label: Database user
+        default: wordpress
+        kind: text
+      - key: DB_PASSWORD
+        label: Database password
+        kind: secret
+      - key: DB_ROOT_PASSWORD
+        label: Database root password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/wordpress.svg
+    composeFile: apps/wordpress/compose.yml
+  - id: adminer
+    name: Adminer
+    description: A small web page for browsing and editing databases (PostgreSQL, MySQL and more).
+    category: Tools
+    mainService: adminer
+    port: 8080
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/adminer.svg
+    composeFile: apps/adminer/compose.yml
+  - id: ghost
+    name: Ghost
+    description: A publishing platform for blogs and newsletters, with its own MySQL database.
+    category: CMS
+    mainService: ghost
+    port: 2368
+    publicWeb: true
+    variables:
+      - key: SITE_URL
+        label: Public address
+        description: The address the site will be opened at, for example https://blog.example.com
+        kind: text
+      - key: DB_PASSWORD
+        label: Database password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/ghost.svg
+    composeFile: apps/ghost/compose.yml
+  - id: directus
+    name: Directus
+    description: "A headless CMS and data platform: a ready admin app and API on top of a PostgreSQL database."
+    category: CMS
+    mainService: directus
+    port: 8055
+    publicWeb: true
+    variables:
+      - key: ADMIN_EMAIL
+        label: Admin email
+        default: admin@example.com
+        kind: text
+      - key: ADMIN_PASSWORD
+        label: Admin password
+        kind: secret
+      - key: KEY
+        label: Instance key
+        kind: secret
+      - key: SECRET
+        label: Signing secret
+        kind: secret
+      - &a1
+        key: DB_PASSWORD
+        label: Database password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/directus.svg
+    composeFile: apps/directus/compose.yml
+  - id: drupal
+    name: Drupal
+    description: 'Drupal 11 with a PostgreSQL database. In the installer choose PostgreSQL and use the host "db". Open it right after deploying: the first visitor sets it up.'
+    category: CMS
+    mainService: drupal
+    port: 80
+    publicWeb: true
+    variables:
+      - key: DB_NAME
+        label: Database name
+        default: drupal
+        kind: text
+      - key: DB_USER
+        label: Database user
+        default: drupal
+        kind: text
+      - *a1
+    icon: https://provelox.github.io/templates/icons/drupal.svg
+    composeFile: apps/drupal/compose.yml
+  - id: joomla
+    name: Joomla
+    description: "Joomla 5 with a MariaDB database already connected. Open it right after deploying: the first visitor sets it up."
+    category: CMS
+    mainService: joomla
+    port: 80
+    publicWeb: true
+    variables:
+      - key: DB_NAME
+        label: Database name
+        default: joomla
+        kind: text
+      - key: DB_USER
+        label: Database user
+        default: joomla
+        kind: text
+      - *a1
+      - key: DB_ROOT_PASSWORD
+        label: Database root password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/joomla.svg
+    composeFile: apps/joomla/compose.yml
+  - id: n8n
+    name: n8n
+    description: "Workflow automation: connect apps and APIs with a visual editor. Open it right after deploying: the first visitor sets it up."
+    category: Automation
+    mainService: n8n
+    port: 5678
+    publicWeb: true
+    variables:
+      - key: PUBLIC_URL
+        label: Public address
+        description: The full address it will be opened at, for example https://n8n.example.com
+        kind: text
+      - key: N8N_ENCRYPTION_KEY
+        label: Encryption key
+        description: "Protects saved credentials. Keep it: without it they cannot be read back."
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/n8n.svg
+    composeFile: apps/n8n/compose.yml
+  - id: nocodb
+    name: NocoDB
+    description: "A spreadsheet-style front end for databases: an open alternative to Airtable. Open it right after deploying: the first visitor sets it up."
+    category: Automation
+    mainService: nocodb
+    port: 8080
+    publicWeb: true
+    variables:
+      - key: NC_AUTH_JWT_SECRET
+        label: Signing secret
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/nocodb.png
+    composeFile: apps/nocodb/compose.yml
+  - id: appsmith
+    name: Appsmith
+    description: "Build internal tools and dashboards on top of your databases and APIs. Open it right after deploying: the first visitor sets it up."
+    category: Automation
+    mainService: appsmith
+    port: 80
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/appsmith.svg
+    composeFile: apps/appsmith/compose.yml
+  - id: nextcloud
+    name: Nextcloud
+    description: File sync and sharing, calendar and contacts, with a PostgreSQL database and an admin account created for you.
+    category: Productivity
+    mainService: nextcloud
+    port: 80
+    publicWeb: true
+    variables:
+      - key: TRUSTED_DOMAIN
+        label: Domain
+        description: The domain it will be opened on, without https://, for example cloud.example.com
+        kind: text
+      - key: ADMIN_USER
+        label: Admin username
+        default: admin
+        kind: text
+      - key: ADMIN_PASSWORD
+        label: Admin password
+        kind: secret
+      - *a1
+    icon: https://provelox.github.io/templates/icons/nextcloud.svg
+    composeFile: apps/nextcloud/compose.yml
+  - id: mattermost
+    name: Mattermost
+    description: "Team chat with channels, threads and file sharing, on PostgreSQL. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: mattermost
+    port: 8065
+    publicWeb: true
+    variables:
+      - *a1
+    icon: https://provelox.github.io/templates/icons/mattermost.svg
+    composeFile: apps/mattermost/compose.yml
+  - id: paperless-ngx
+    name: Paperless-ngx
+    description: Scan, index and search your documents. Includes PostgreSQL and Redis, and an admin account created for you.
+    category: Productivity
+    mainService: paperless
+    port: 8000
+    publicWeb: true
+    variables:
+      - key: PAPERLESS_URL
+        label: Public address
+        description: The address it will be opened at, for example https://docs.example.com
+        kind: text
+      - key: ADMIN_USER
+        label: Admin username
+        default: admin
+        kind: text
+      - key: ADMIN_PASSWORD
+        label: Admin password
+        kind: secret
+      - key: SECRET_KEY
+        label: Secret key
+        kind: secret
+      - *a1
+    icon: https://provelox.github.io/templates/icons/paperlessngx.svg
+    composeFile: apps/paperless-ngx/compose.yml
+  - id: wikijs
+    name: Wiki.js
+    description: "A modern wiki for documentation and team knowledge, on PostgreSQL. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: wiki
+    port: 3000
+    publicWeb: true
+    variables:
+      - *a1
+    icon: https://provelox.github.io/templates/icons/wikidotjs.svg
+    composeFile: apps/wikijs/compose.yml
+  - id: memos
+    name: Memos
+    description: "A lightweight place for quick notes and snippets. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: memos
+    port: 5230
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/memos.svg
+    composeFile: apps/memos/compose.yml
+  - id: vaultwarden
+    name: Vaultwarden
+    description: A small, Bitwarden-compatible password manager server. Works with the Bitwarden apps and browser extensions.
+    category: Security
+    mainService: vaultwarden
+    port: 80
+    publicWeb: true
+    variables:
+      - key: ADMIN_TOKEN
+        label: Admin page token
+        description: Opens the /admin page. Keep it private.
+        kind: secret
+      - key: SIGNUPS_ALLOWED
+        label: Allow sign-ups
+        description: Set to false after you and your people have created accounts.
+        default: "true"
+        kind: text
+    icon: https://provelox.github.io/templates/icons/vaultwarden.svg
+    composeFile: apps/vaultwarden/compose.yml
+  - id: keycloak
+    name: Keycloak
+    description: Single sign-on and identity management (OpenID Connect, SAML) on PostgreSQL, with an admin account created for you.
+    category: Security
+    mainService: keycloak
+    port: 8080
+    publicWeb: true
+    variables:
+      - key: KC_HOSTNAME
+        label: Public address
+        description: The full address it will be opened at, for example https://login.example.com
+        kind: text
+      - key: ADMIN_USER
+        label: Admin username
+        default: admin
+        kind: text
+      - key: ADMIN_PASSWORD
+        label: Admin password
+        kind: secret
+      - *a1
+    icon: https://provelox.github.io/templates/icons/keycloak.svg
+    composeFile: apps/keycloak/compose.yml
+  - id: metabase
+    name: Metabase
+    description: "Business intelligence: ask questions of your data and build dashboards without SQL. Open it right after deploying: the first visitor sets it up."
+    category: Analytics
+    mainService: metabase
+    port: 3000
+    publicWeb: true
+    variables:
+      - *a1
+    icon: https://provelox.github.io/templates/icons/metabase.svg
+    composeFile: apps/metabase/compose.yml
+  - id: grafana
+    name: Grafana
+    description: Dashboards and alerts for metrics, logs and databases, with an admin account created for you.
+    category: Monitoring
+    mainService: grafana
+    port: 3000
+    publicWeb: true
+    variables:
+      - key: ADMIN_USER
+        label: Admin username
+        default: admin
+        kind: text
+      - key: ADMIN_PASSWORD
+        label: Admin password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/grafana.svg
+    composeFile: apps/grafana/compose.yml
+  - id: gitea
+    name: Gitea
+    description: "A self-hosted Git service with issues and pull requests, using a built-in database. Git over HTTPS only. Open it right after deploying: the first visitor sets it up."
+    category: Development
+    mainService: gitea
+    port: 3000
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/gitea.svg
+    composeFile: apps/gitea/compose.yml
+  - id: open-webui
+    name: Open WebUI
+    description: "A chat interface for language models: connect it to any OpenAI-compatible API. Open it right after deploying: the first visitor sets it up. The first account becomes the admin."
+    category: AI
+    mainService: open-webui
+    port: 8080
+    publicWeb: true
+    variables:
+      - key: WEBUI_SECRET_KEY
+        label: Secret key
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/openwebui.svg
+    composeFile: apps/open-webui/compose.yml
+  - id: langflow
+    name: Langflow
+    description: Build AI agents and workflows visually. Sign in with the admin account created for you.
+    category: AI
+    mainService: langflow
+    port: 7860
+    publicWeb: true
+    variables:
+      - key: ADMIN_USER
+        label: Admin username
+        default: admin
+        kind: text
+      - key: ADMIN_PASSWORD
+        label: Admin password
+        kind: secret
+      - key: SECRET_KEY
+        label: Secret key
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/langflow.svg
+    composeFile: apps/langflow/compose.yml
+  - id: anythingllm
+    name: AnythingLLM
+    description: Chat with your documents using any language model. Protected by the access password you choose.
+    category: AI
+    mainService: anythingllm
+    port: 3001
+    publicWeb: true
+    variables:
+      - key: AUTH_TOKEN
+        label: Access password
+        kind: secret
+      - key: JWT_SECRET
+        label: Signing secret
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/anythingllm.png
+    composeFile: apps/anythingllm/compose.yml
+  - id: clickhouse
+    name: ClickHouse
+    description: A fast column-oriented database for analytics. Data is kept on a volume.
+    category: Database
+    mainService: clickhouse
+    port: 8123
+    connect: http://{CLICKHOUSE_USER}:{CLICKHOUSE_PASSWORD}@{host}:{port}/?database={CLICKHOUSE_DB}
+    publicWeb: false
+    variables:
+      - key: CLICKHOUSE_USER
+        label: Username
+        default: default
+        kind: text
+      - key: CLICKHOUSE_DB
+        label: Database name
+        default: app
+        kind: text
+      - key: CLICKHOUSE_PASSWORD
+        label: Password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/clickhouse.svg
+    composeFile: apps/clickhouse/compose.yml
+  - id: meilisearch
+    name: Meilisearch
+    description: Fast, typo-tolerant search for your site or app, protected by a master key.
+    category: Database
+    mainService: meilisearch
+    port: 7700
+    connect: "http://{host}:{port} (key: {MEILI_MASTER_KEY})"
+    publicWeb: false
+    variables:
+      - key: MEILI_MASTER_KEY
+        label: Master key
+        description: At least 16 characters. Use it to create narrower keys for your app.
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/meilisearch.svg
+    composeFile: apps/meilisearch/compose.yml
+  - id: strapi
+    name: Strapi
+    description: "A headless CMS with an admin panel and a REST and GraphQL API, on PostgreSQL. A community-packaged image (Elestio): an empty Strapi to start from. To run your own content types, build your project into an image and deploy it with a Compose file."
+    category: CMS
+    mainService: strapi
+    port: 1337
+    publicWeb: true
+    variables:
+      - key: APP_KEYS
+        label: App keys
+        kind: secret
+      - key: API_TOKEN_SALT
+        label: API token salt
+        kind: secret
+      - key: ADMIN_JWT_SECRET
+        label: Admin signing secret
+        kind: secret
+      - key: TRANSFER_TOKEN_SALT
+        label: Transfer token salt
+        kind: secret
+      - key: JWT_SECRET
+        label: Signing secret
+        kind: secret
+      - *a1
+    icon: https://provelox.github.io/templates/icons/strapi.svg
+    composeFile: apps/strapi/compose.yml
+  - id: baserow
+    name: Baserow
+    description: "An open Airtable alternative: build databases and apps without code. Open it right after deploying: the first visitor sets it up."
+    category: Automation
+    mainService: baserow
+    port: 80
+    publicWeb: true
+    variables:
+      - key: BASEROW_PUBLIC_URL
+        label: Public address
+        description: The address it will be opened at, for example https://tables.example.com
+        kind: text
+      - key: SECRET_KEY
+        label: Secret key
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/baserow.svg
+    composeFile: apps/baserow/compose.yml
+  - id: odoo
+    name: Odoo
+    description: "Business apps in one place: CRM, sales, invoicing, inventory and more, on PostgreSQL. The first page creates your database. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: odoo
+    port: 8069
+    publicWeb: true
+    variables:
+      - *a1
+    icon: https://provelox.github.io/templates/icons/odoo.svg
+    composeFile: apps/odoo/compose.yml
+  - id: matomo
+    name: Matomo
+    description: "Web analytics you own, a privacy-friendly alternative to Google Analytics, on MariaDB. Open it right after deploying: the first visitor sets it up."
+    category: Analytics
+    mainService: matomo
+    port: 80
+    publicWeb: true
+    variables:
+      - *a1
+      - key: DB_ROOT_PASSWORD
+        label: Database root password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/matomo.svg
+    composeFile: apps/matomo/compose.yml
+  - id: ollama
+    name: Ollama
+    description: Run open language models on this server (CPU). Other apps, such as Open WebUI, connect to it privately. It has no login, so it is not published to the internet.
+    category: AI
+    mainService: ollama
+    port: 11434
+    connect: http://{host}:{port}
+    publicWeb: false
+    variables: []
+    icon: https://provelox.github.io/templates/icons/ollama.svg
+    composeFile: apps/ollama/compose.yml
+  - id: qdrant
+    name: Qdrant
+    description: A vector database for search and AI apps, protected by an API key.
+    category: Database
+    mainService: qdrant
+    port: 6333
+    connect: "http://{host}:{port} (api-key: {API_KEY})"
+    publicWeb: false
+    variables:
+      - key: API_KEY
+        label: API key
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/qdrant.svg
+    composeFile: apps/qdrant/compose.yml
+  - id: rabbitmq
+    name: RabbitMQ
+    description: A message broker for queues and background jobs, with a user and password you choose.
+    category: Database
+    mainService: rabbitmq
+    port: 5672
+    connect: amqp://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@{host}:{port}
+    publicWeb: false
+    variables:
+      - key: RABBITMQ_USER
+        label: Username
+        default: app
+        kind: text
+      - key: RABBITMQ_PASSWORD
+        label: Password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/rabbitmq.svg
+    composeFile: apps/rabbitmq/compose.yml
+  - id: mailpit
+    name: Mailpit
+    description: Catches the email your apps send while you build them, with a web inbox to read it. Apps send to it on port 1025.
+    category: Development
+    mainService: mailpit
+    port: 8025
+    publicWeb: true
+    variables:
+      - key: MAIL_USER
+        label: Inbox username
+        default: admin
+        kind: text
+      - key: MAIL_PASSWORD
+        label: Inbox password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/mailpit.svg
+    composeFile: apps/mailpit/compose.yml
+  - id: excalidraw
+    name: Excalidraw
+    description: A virtual whiteboard for sketching diagrams with a hand-drawn look. Drawings stay in each visitor's browser.
+    category: Productivity
+    mainService: excalidraw
+    port: 80
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/excalidraw.svg
+    composeFile: apps/excalidraw/compose.yml
+  - id: it-tools
+    name: IT-Tools
+    description: "Handy tools for developers and IT people: converters, generators, encoders and more. Everything runs in the browser."
+    category: Tools
+    mainService: it-tools
+    port: 80
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/ittools.png
+    composeFile: apps/it-tools/compose.yml
+  - id: stirling-pdf
+    name: Stirling PDF
+    description: Merge, split, convert, compress and sign PDFs from a web page, on your own server.
+    category: Tools
+    mainService: stirling-pdf
+    port: 8080
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/stirlingpdf.svg
+    composeFile: apps/stirling-pdf/compose.yml
+  - id: actual-budget
+    name: Actual Budget
+    description: "A private, local-first budgeting app that syncs across your devices. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: actual
+    port: 5006
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/actualbudget.svg
+    composeFile: apps/actual-budget/compose.yml
+  - id: mealie
+    name: Mealie
+    description: A recipe manager and meal planner. Sign in with the admin account created for you.
+    category: Productivity
+    mainService: mealie
+    port: 9000
+    publicWeb: true
+    variables:
+      - &a2
+        key: ADMIN_EMAIL
+        label: Admin email
+        default: admin@example.com
+        kind: text
+      - &a3
+        key: ADMIN_PASSWORD
+        label: Admin password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/mealie.svg
+    composeFile: apps/mealie/compose.yml
+  - id: linkding
+    name: Linkding
+    description: A minimal bookmark manager with tags and search, with an admin account created for you.
+    category: Productivity
+    mainService: linkding
+    port: 9090
+    publicWeb: true
+    variables:
+      - key: ADMIN_USER
+        label: Admin username
+        default: admin
+        kind: text
+      - key: ADMIN_PASSWORD
+        label: Admin password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/linkding.svg
+    composeFile: apps/linkding/compose.yml
+  - id: docuseal
+    name: DocuSeal
+    description: "Create, fill and sign documents online: an open alternative to DocuSign. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: docuseal
+    port: 3000
+    publicWeb: true
+    variables:
+      - key: SECRET_KEY_BASE
+        label: Secret key
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/docuseal.svg
+    composeFile: apps/docuseal/compose.yml
+  - id: firefly-iii
+    name: Firefly III
+    description: "Personal finance manager: track spending, budgets and accounts, on PostgreSQL. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: firefly
+    port: 8080
+    publicWeb: true
+    variables:
+      - key: PUBLIC_URL
+        label: Public address
+        description: The full address it will be opened at, for example https://money.example.com
+        kind: text
+      - *a2
+      - key: APP_KEY
+        label: App key
+        description: "Exactly 32 characters. Keep it: data is encrypted with it."
+        kind: secret
+        minLength: 32
+      - *a1
+    icon: https://provelox.github.io/templates/icons/fireflyiii.svg
+    composeFile: apps/firefly-iii/compose.yml
+  - id: freshrss
+    name: FreshRSS
+    description: "A self-hosted feed reader that keeps your subscriptions and read state in one place. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: freshrss
+    port: 80
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/freshrss.svg
+    composeFile: apps/freshrss/compose.yml
+  - id: miniflux
+    name: Miniflux
+    description: A minimalist, fast feed reader, on PostgreSQL, with an admin account created for you.
+    category: Productivity
+    mainService: miniflux
+    port: 8080
+    publicWeb: true
+    variables:
+      - &a4
+        key: ADMIN_USER
+        label: Admin username
+        default: admin
+        kind: text
+      - *a3
+      - *a1
+    icon: https://provelox.github.io/templates/icons/miniflux.png
+    composeFile: apps/miniflux/compose.yml
+  - id: linkwarden
+    name: Linkwarden
+    description: "Save, organize and archive links and pages, with your collections in one place, on PostgreSQL. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: linkwarden
+    port: 3000
+    publicWeb: true
+    variables:
+      - key: PUBLIC_URL
+        label: Public address
+        description: The full address it will be opened at, for example https://links.example.com
+        kind: text
+      - key: NEXTAUTH_SECRET
+        label: Sign-in secret
+        kind: secret
+      - *a1
+    icon: https://provelox.github.io/templates/icons/linkwarden.png
+    composeFile: apps/linkwarden/compose.yml
+  - id: shlink
+    name: Shlink
+    description: A URL shortener with visit statistics and an API, on PostgreSQL. Manage it with the API key you set, from Shlink's web client or its API.
+    category: Tools
+    mainService: shlink
+    port: 8080
+    publicWeb: true
+    variables:
+      - key: DEFAULT_DOMAIN
+        label: Short domain
+        description: The domain short links use, without https://, for example go.example.com
+        kind: text
+      - key: API_KEY
+        label: API key
+        kind: secret
+      - *a1
+    icon: https://provelox.github.io/templates/icons/shlink.svg
+    composeFile: apps/shlink/compose.yml
+  - id: yourls
+    name: YOURLS
+    description: Your own URL shortener with statistics, on MariaDB. Sign in with the admin account created for you.
+    category: Tools
+    mainService: yourls
+    port: 80
+    publicWeb: true
+    variables:
+      - key: PUBLIC_URL
+        label: Public address
+        description: The full address it will be opened at, for example https://go.example.com
+        kind: text
+      - *a4
+      - *a3
+      - *a1
+      - &a5
+        key: DB_ROOT_PASSWORD
+        label: Database root password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/yourls.svg
+    composeFile: apps/yourls/compose.yml
+  - id: privatebin
+    name: PrivateBin
+    description: "A paste service where the server never sees what is shared: it is encrypted in the browser."
+    category: Tools
+    mainService: privatebin
+    port: 8080
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/privatebin.svg
+    composeFile: apps/privatebin/compose.yml
+  - id: drawio
+    name: draw.io
+    description: A diagram editor for flowcharts, network maps and UML. Diagrams are saved to your own device.
+    category: Productivity
+    mainService: drawio
+    port: 8080
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/diagramsdotnet.svg
+    composeFile: apps/drawio/compose.yml
+  - id: homebox
+    name: Homebox
+    description: "An inventory for your home: track belongings, warranties and where things are kept. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: homebox
+    port: 7745
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/homebox.svg
+    composeFile: apps/homebox/compose.yml
+  - id: photoprism
+    name: PhotoPrism
+    description: Browse, organize and search your photos with automatic tagging. Upload from the web page. Sign in with the admin account created for you.
+    category: Productivity
+    mainService: photoprism
+    port: 2342
+    publicWeb: true
+    variables:
+      - *a4
+      - *a3
+    icon: https://provelox.github.io/templates/icons/photoprism.svg
+    composeFile: apps/photoprism/compose.yml
+  - id: audiobookshelf
+    name: Audiobookshelf
+    description: "Host and listen to your audiobooks and podcasts, with apps for phones. Open it right after deploying: the first visitor sets it up."
+    category: Productivity
+    mainService: audiobookshelf
+    port: 80
+    publicWeb: true
+    variables: []
+    icon: https://provelox.github.io/templates/icons/audiobookshelf.svg
+    composeFile: apps/audiobookshelf/compose.yml
+  - id: gitlab
+    name: GitLab
+    description: "The full GitLab Community Edition: repositories, issues, merge requests and CI. Needs about 4 GB of memory and a few minutes to start. Git over HTTPS only. Sign in as root with the password you set."
+    category: Development
+    mainService: gitlab
+    port: 80
+    publicWeb: true
+    variables:
+      - key: GITLAB_URL
+        label: Public address
+        description: The full address it will be opened at, for example https://git.example.com
+        kind: text
+      - key: ROOT_PASSWORD
+        label: Root password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/gitlab.svg
+    composeFile: apps/gitlab/compose.yml
+  - id: pgadmin
+    name: pgAdmin
+    description: The standard web tool for managing PostgreSQL databases. Add a server with the host shown on its project.
+    category: Tools
+    mainService: pgadmin
+    port: 80
+    publicWeb: true
+    variables:
+      - *a2
+      - *a3
+    icon: https://provelox.github.io/templates/icons/pgadmin.png
+    composeFile: apps/pgadmin/compose.yml
+  - id: phpmyadmin
+    name: phpMyAdmin
+    description: The classic web tool for managing MySQL and MariaDB databases. Type the host shown on the database's project to sign in.
+    category: Tools
+    mainService: phpmyadmin
+    port: 80
+    publicWeb: true
+    variables:
+      - key: DB_HOST
+        label: Database host
+        description: The host shown on the database's project page, for example myproject-mysql. Only this one is reachable from the page.
+        kind: text
+    icon: https://provelox.github.io/templates/icons/phpmyadmin.svg
+    composeFile: apps/phpmyadmin/compose.yml
+  - id: healthchecks
+    name: Healthchecks
+    description: "Monitors your cron jobs and scheduled tasks: they ping it, and it alerts you when a ping is missing. Sign in with the admin account created for you."
+    category: Monitoring
+    mainService: healthchecks
+    port: 8000
+    publicWeb: true
+    variables:
+      - key: PUBLIC_URL
+        label: Public address
+        description: The full address it will be opened at, for example https://checks.example.com
+        kind: text
+      - *a2
+      - *a3
+      - key: SECRET_KEY
+        label: Secret key
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/healthchecks.svg
+    composeFile: apps/healthchecks/compose.yml
+  - id: gotify
+    name: Gotify
+    description: A simple server for sending and receiving push notifications, with an admin account created for you.
+    category: Tools
+    mainService: gotify
+    port: 80
+    publicWeb: true
+    variables:
+      - *a4
+      - *a3
+    icon: https://provelox.github.io/templates/icons/gotify.png
+    composeFile: apps/gotify/compose.yml
+  - id: listmonk
+    name: Listmonk
+    description: "Newsletters and mailing lists: a fast, self-hosted way to send email to your subscribers, on PostgreSQL. Sign in with the admin account created for you."
+    category: Productivity
+    mainService: listmonk
+    port: 9000
+    publicWeb: true
+    variables:
+      - *a4
+      - *a3
+      - *a1
+    icon: https://provelox.github.io/templates/icons/listmonk.svg
+    composeFile: apps/listmonk/compose.yml
+  - id: litellm
+    name: LiteLLM
+    description: One OpenAI-compatible gateway to many AI model providers, with keys, budgets and usage tracking, on PostgreSQL. Your master key is "sk-" followed by the value below. The admin page is at /ui.
+    category: AI
+    mainService: litellm
+    port: 4000
+    publicWeb: true
+    variables:
+      - key: MASTER_KEY
+        label: Master key
+        kind: secret
+      - *a4
+      - *a3
+      - *a1
+    icon: https://provelox.github.io/templates/icons/litellm.png
+    composeFile: apps/litellm/compose.yml
+  - id: prestashop
+    name: PrestaShop
+    description: "An online shop: catalog, orders, payments and shipping, on MariaDB. Installs itself on first start (a few minutes). The admin panel is at /admin-panel."
+    category: Commerce
+    mainService: prestashop
+    port: 80
+    publicWeb: true
+    variables:
+      - key: PS_DOMAIN
+        label: Domain
+        description: The domain the shop will be opened on, without https://, for example shop.example.com
+        kind: text
+      - *a2
+      - *a3
+      - *a1
+      - *a5
+    icon: https://provelox.github.io/templates/icons/prestashop.svg
+    composeFile: apps/prestashop/compose.yml
+  - id: mariadb
+    name: MariaDB
+    description: MariaDB 11 with a database created for you. Data is kept on a volume.
+    category: Database
+    mainService: mariadb
+    port: 3306
+    connect: mysql://root:{MARIADB_ROOT_PASSWORD}@{host}:{port}/{MARIADB_DATABASE}
+    publicWeb: false
+    variables:
+      - key: MARIADB_DATABASE
+        label: Database name
+        default: app
+        kind: text
+      - key: MARIADB_ROOT_PASSWORD
+        label: Root password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/mariadb.svg
+    composeFile: apps/mariadb/compose.yml
+  - id: valkey
+    name: Valkey
+    description: The open-source Redis-compatible store for caches, queues and sessions, with a password and on-disk persistence.
+    category: Database
+    mainService: valkey
+    port: 6379
+    connect: redis://:{VALKEY_PASSWORD}@{host}:{port}
+    publicWeb: false
+    variables:
+      - key: VALKEY_PASSWORD
+        label: Password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/valkey.svg
+    composeFile: apps/valkey/compose.yml
+  - id: timescaledb
+    name: TimescaleDB
+    description: PostgreSQL with time-series superpowers, for metrics, events and IoT data. Data is kept on a volume.
+    category: Database
+    mainService: timescaledb
+    port: 5432
+    connect: postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{host}:{port}/{POSTGRES_DB}
+    publicWeb: false
+    variables:
+      - key: POSTGRES_USER
+        label: Username
+        default: postgres
+        kind: text
+      - key: POSTGRES_DB
+        label: Database name
+        default: app
+        kind: text
+      - key: POSTGRES_PASSWORD
+        label: Password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/timescale.svg
+    composeFile: apps/timescaledb/compose.yml
+  - id: influxdb
+    name: InfluxDB
+    description: A time-series database for metrics and sensor data, with a web interface. Sign in with the admin account created for you.
+    category: Database
+    mainService: influxdb
+    port: 8086
+    publicWeb: true
+    variables:
+      - *a4
+      - *a3
+      - key: ORG
+        label: Organization
+        default: my-org
+        kind: text
+      - key: BUCKET
+        label: First bucket
+        default: default
+        kind: text
+      - key: ADMIN_TOKEN
+        label: Admin API token
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/influxdb.svg
+    composeFile: apps/influxdb/compose.yml
+  - id: couchdb
+    name: CouchDB
+    description: A document database with a simple HTTP API and easy syncing. Data is kept on a volume.
+    category: Database
+    mainService: couchdb
+    port: 5984
+    connect: http://{COUCHDB_USER}:{COUCHDB_PASSWORD}@{host}:{port}
+    publicWeb: false
+    variables:
+      - key: COUCHDB_USER
+        label: Admin username
+        default: admin
+        kind: text
+      - key: COUCHDB_PASSWORD
+        label: Admin password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/apachecouchdb.svg
+    composeFile: apps/couchdb/compose.yml
+  - id: neo4j
+    name: Neo4j
+    description: A graph database for connected data. Apps connect over Bolt as the user "neo4j". Data is kept on a volume.
+    category: Database
+    mainService: neo4j
+    port: 7687
+    connect: bolt://neo4j:{NEO4J_PASSWORD}@{host}:{port}
+    publicWeb: false
+    variables:
+      - key: NEO4J_PASSWORD
+        label: Password
+        kind: secret
+    icon: https://provelox.github.io/templates/icons/neo4j.svg
+    composeFile: apps/neo4j/compose.yml
+  - id: squidex
+    name: Squidex
+    description: An open source headless CMS with a GraphQL and REST API, assets, workflows and multi-language content. With MongoDB.
+    category: CMS
+    mainService: squidex
+    port: 80
+    publicWeb: true
+    variables:
+      - key: URLS__BASEURL
+        label: Public address
+        description: The full address Squidex is opened at, like https://cms.example.com. Squidex builds its sign-in and asset links from it and will not sign you in at any other address, so set the real one and add that domain under the app's Networking after deploying.
+        default: http://localhost
+      - key: IDENTITY__ADMINEMAIL
+        label: Admin email
+        default: admin@example.com
+      - key: IDENTITY__ADMINPASSWORD
+        label: Admin password
+        description: "Choose one: at least 8 characters with an upper and a lower case letter, a number and a symbol, or Squidex will not create the admin."
+        default: ""
+    composeFile: apps/squidex/compose.yml

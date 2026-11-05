@@ -1,0 +1,8 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    volumes:
+      - models:/root/.ollama
+volumes:
+  models:

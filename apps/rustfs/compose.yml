@@ -1,0 +1,14 @@
+services:
+  rustfs:
+    image: rustfs/rustfs:latest
+    restart: unless-stopped
+    environment:
+      RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY}
+      RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY}
+    volumes:
+      - data:/data
+    x-provelox:
+      expose: true
+      port: 9001
+volumes:
+  data:

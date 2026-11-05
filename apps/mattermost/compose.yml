@@ -1,0 +1,31 @@
+services:
+  mattermost:
+    image: mattermost/mattermost-team-edition:latest
+    restart: unless-stopped
+    depends_on: [db]
+    environment:
+      MM_SQLSETTINGS_DRIVERNAME: postgres
+      MM_SQLSETTINGS_DATASOURCE: "postgres://mattermost:${DB_PASSWORD}@db:5432/mattermost?sslmode=disable&connect_timeout=10"
+    volumes:
+      - config:/mattermost/config
+      - data:/mattermost/data
+      - logs:/mattermost/logs
+      - plugins:/mattermost/plugins
+    x-provelox:
+      expose: true
+      port: 8065
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mattermost
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: mattermost
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  config:
+  data:
+  logs:
+  plugins:
+  dbdata:

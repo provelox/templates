@@ -1,0 +1,13 @@
+services:
+  nocodb:
+    image: nocodb/nocodb:latest
+    restart: unless-stopped
+    environment:
+      NC_AUTH_JWT_SECRET: ${NC_AUTH_JWT_SECRET}
+    volumes:
+      - data:/usr/app/data
+    x-provelox:
+      expose: true
+      port: 8080
+volumes:
+  data:

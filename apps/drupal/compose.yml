@@ -1,0 +1,28 @@
+services:
+  drupal:
+    image: drupal:11
+    restart: unless-stopped
+    depends_on: [db]
+    volumes:
+      - modules:/var/www/html/modules
+      - profiles:/var/www/html/profiles
+      - themes:/var/www/html/themes
+      - sites:/var/www/html/sites
+    x-provelox:
+      expose: true
+      port: 80
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  modules:
+  profiles:
+  themes:
+  sites:
+  dbdata:

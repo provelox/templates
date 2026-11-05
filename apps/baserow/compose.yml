@@ -1,0 +1,14 @@
+services:
+  baserow:
+    image: baserow/baserow:latest
+    restart: unless-stopped
+    environment:
+      BASEROW_PUBLIC_URL: ${BASEROW_PUBLIC_URL}
+      SECRET_KEY: ${SECRET_KEY}
+    volumes:
+      - data:/baserow/data
+    x-provelox:
+      expose: true
+      port: 80
+volumes:
+  data:

@@ -1,0 +1,13 @@
+services:
+  gitea:
+    image: gitea/gitea:1
+    restart: unless-stopped
+    environment:
+      GITEA__database__DB_TYPE: sqlite3
+    volumes:
+      - data:/data
+    x-provelox:
+      expose: true
+      port: 3000
+volumes:
+  data:

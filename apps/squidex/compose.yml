@@ -1,0 +1,25 @@
+services:
+  squidex:
+    image: squidex/squidex:7
+    restart: unless-stopped
+    depends_on: [mongo]
+    environment:
+      URLS__BASEURL: ${URLS__BASEURL}
+      EVENTSTORE__TYPE: MongoDB
+      EVENTSTORE__MONGODB__CONFIGURATION: mongodb://mongo
+      STORE__MONGODB__CONFIGURATION: mongodb://mongo
+      IDENTITY__ADMINEMAIL: ${IDENTITY__ADMINEMAIL}
+      IDENTITY__ADMINPASSWORD: ${IDENTITY__ADMINPASSWORD:?Choose an admin password}
+    volumes:
+      - assets:/app/Assets
+    x-provelox:
+      expose: true
+      port: 80
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    volumes:
+      - mongodata:/data/db
+volumes:
+  assets:
+  mongodata:

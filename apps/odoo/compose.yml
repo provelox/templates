@@ -1,0 +1,26 @@
+services:
+  odoo:
+    image: odoo:18
+    restart: unless-stopped
+    depends_on: [db]
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - data:/var/lib/odoo
+    x-provelox:
+      expose: true
+      port: 8069
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  data:
+  dbdata:

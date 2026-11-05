@@ -1,0 +1,11 @@
+services:
+  appsmith:
+    image: appsmith/appsmith-ce:latest
+    restart: unless-stopped
+    volumes:
+      - stacks:/appsmith-stacks
+    x-provelox:
+      expose: true
+      port: 80
+volumes:
+  stacks:

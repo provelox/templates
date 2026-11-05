@@ -1,0 +1,33 @@
+services:
+  listmonk:
+    image: listmonk/listmonk:latest
+    restart: unless-stopped
+    depends_on: [db]
+    command: sh -c "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"
+    environment:
+      LISTMONK_app__address: "0.0.0.0:9000"
+      LISTMONK_db__host: db
+      LISTMONK_db__port: "5432"
+      LISTMONK_db__user: listmonk
+      LISTMONK_db__password: ${DB_PASSWORD}
+      LISTMONK_db__database: listmonk
+      LISTMONK_db__ssl_mode: disable
+      LISTMONK_ADMIN_USER: ${ADMIN_USER}
+      LISTMONK_ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    volumes:
+      - uploads:/listmonk/uploads
+    x-provelox:
+      expose: true
+      port: 9000
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: listmonk
+      POSTGRES_USER: listmonk
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  uploads:
+  dbdata:

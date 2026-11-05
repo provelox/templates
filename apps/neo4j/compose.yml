@@ -1,0 +1,10 @@
+services:
+  neo4j:
+    image: neo4j:5
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: "neo4j/${NEO4J_PASSWORD}"
+    volumes:
+      - data:/data
+volumes:
+  data:

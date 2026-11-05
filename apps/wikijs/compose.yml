@@ -1,0 +1,26 @@
+services:
+  wiki:
+    image: ghcr.io/requarks/wiki:2
+    restart: unless-stopped
+    depends_on: [db]
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_USER: wiki
+      DB_PASS: ${DB_PASSWORD}
+      DB_NAME: wiki
+    x-provelox:
+      expose: true
+      port: 3000
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_USER: wiki
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  dbdata:

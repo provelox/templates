@@ -1,0 +1,17 @@
+services:
+  photoprism:
+    image: photoprism/photoprism:latest
+    restart: unless-stopped
+    environment:
+      PHOTOPRISM_ADMIN_USER: ${ADMIN_USER}
+      PHOTOPRISM_ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      PHOTOPRISM_DATABASE_DRIVER: sqlite
+    volumes:
+      - storage:/photoprism/storage
+      - originals:/photoprism/originals
+    x-provelox:
+      expose: true
+      port: 2342
+volumes:
+  storage:
+  originals:

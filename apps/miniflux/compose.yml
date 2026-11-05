@@ -1,0 +1,25 @@
+services:
+  miniflux:
+    image: miniflux/miniflux:latest
+    restart: unless-stopped
+    depends_on: [db]
+    environment:
+      DATABASE_URL: "postgres://miniflux:${DB_PASSWORD}@db/miniflux?sslmode=disable"
+      RUN_MIGRATIONS: "1"
+      CREATE_ADMIN: "1"
+      ADMIN_USERNAME: ${ADMIN_USER}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    x-provelox:
+      expose: true
+      port: 8080
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: miniflux
+      POSTGRES_USER: miniflux
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  dbdata:

@@ -1,0 +1,14 @@
+services:
+  gotify:
+    image: gotify/server:latest
+    restart: unless-stopped
+    environment:
+      GOTIFY_DEFAULTUSER_NAME: ${ADMIN_USER}
+      GOTIFY_DEFAULTUSER_PASS: ${ADMIN_PASSWORD}
+    volumes:
+      - data:/app/data
+    x-provelox:
+      expose: true
+      port: 80
+volumes:
+  data:

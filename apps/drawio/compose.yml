@@ -1,0 +1,7 @@
+services:
+  drawio:
+    image: jgraph/drawio:latest
+    restart: unless-stopped
+    x-provelox:
+      expose: true
+      port: 8080

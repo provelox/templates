@@ -1,0 +1,7 @@
+services:
+  it-tools:
+    image: corentinth/it-tools:latest
+    restart: unless-stopped
+    x-provelox:
+      expose: true
+      port: 80
