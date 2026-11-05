@@ -5,7 +5,8 @@
   "description": "Ready-made apps for Provelox: a template registry and the Compose file behind each template.",
   "license": "Apache-2.0",
   "scripts": {
-    "validate": "node scripts/validate.mjs"
+    "validate": "node scripts/validate.mjs",
+    "site": "node scripts/build-site.mjs"
   },
   "devDependencies": {
     "yaml": "^2.9.1"
